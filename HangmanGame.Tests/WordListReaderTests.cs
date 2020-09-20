@@ -41,8 +41,11 @@ namespace HangmanGame.Tests
         [Test]
         public void Should_get_wordList_with_expected_number_of_words()
         {
+            // Arrange
+            var sut = new WordListReader();
+
             // Act
-            var actualWordList = WordListReader.GetWordList(_memoryStream);
+            var actualWordList = sut.GetWordList(_memoryStream);
 
             // Assert
             Assert.AreEqual(_expectedWordList.Count, actualWordList.Count);
@@ -51,8 +54,11 @@ namespace HangmanGame.Tests
         [Test]
         public void Should_get_wordList_with_expected_words()
         {
+            // Arrange
+            var sut = new WordListReader();
+
             // Act
-            var actualWordList = WordListReader.GetWordList(_memoryStream);
+            var actualWordList = sut.GetWordList(_memoryStream);
 
             // Assert
             Assert.AreEqual(_expectedWordList, actualWordList);

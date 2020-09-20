@@ -17,7 +17,7 @@ namespace HangmanGame.UI
             InitializeComponent();
 
             var wordListPath = Properties.Settings.Default.WordlistPath;
-            var viewModel = new MainViewModel(new Hangman(WordListReader.GetWordList(wordListPath), 11));
+            var viewModel = new MainViewModel(new Hangman(new WordListReader().GetWordList(wordListPath), 11));
             DataContext = viewModel;
 
             viewModel.AttemptFailed += AttemptFailed;

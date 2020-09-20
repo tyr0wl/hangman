@@ -12,5 +12,10 @@ namespace HangmanGame
         ///     Reads the word list out of a stream and returns it.
         /// </summary>
         List<string> GetWordList(Stream streamToRead);
+
+        /// <summary>
+        ///     Reads the word list out of a path and returns it.
+        /// </summary>
+        List<string> GetWordList(string pathToWordList);
     }
 }
