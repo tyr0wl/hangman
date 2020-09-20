@@ -1,0 +1,72 @@
+﻿<Window x:Class="HangmanGame.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:HangmanGame.UI.Properties"
+        xmlns:Converters="clr-namespace:HangmanGame.UI.Converters" 
+        xmlns:Controls="clr-namespace:HangmanGame.UI.Controls" mc:Ignorable="d"
+        MinHeight="600"
+        MinWidth="800"
+        Title="{x:Static res:Resources.ApplicationTitle}" >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MainStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Converters:BoolToBrushConverter x:Key="BoolToGameStateConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.5*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="TopGrid" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Viewbox>
+                <TextBlock Text="{Binding FoundWord}" Margin="10" />
+            </Viewbox>
+
+            <Border Margin="5 10 10 5" Grid.Column="1">
+                <Controls:HangmanControl x:Name="HangmanControl" />
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1" Margin="10 5" 
+                Background="{Binding IsWon, Converter={StaticResource BoolToGameStateConverter}}">
+            <Viewbox>
+                <TextBlock x:Name="GameResult" Text="{Binding GameStatusText}" />
+            </Viewbox>
+        </Border>
+
+        <Grid x:Name="BottomGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Controls:KeyboardField x:Name="KeyboardField"
+                              Margin="10 5 5 10"
+                              BorderThickness="1"
+                              BorderBrush="Black"
+                              TemplateCommand="{Binding LetterBoxCommand}"
+                              IsEnabled="{Binding GameStarted}" />
+
+            <Button Grid.Column="1" Margin="5 5 10 10" Click="NewWordButtonPressed" Command="{Binding NewWordCommand}" >
+                <Viewbox>
+                    <TextBlock Text="{x:Static res:Resources.NewWord}" />
+                </Viewbox>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
