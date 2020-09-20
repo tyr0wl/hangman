@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using NUnit.Framework;
 
 namespace HangmanGame.Tests
@@ -7,7 +8,7 @@ namespace HangmanGame.Tests
     {
         private const int AttemptCount = 3;
 
-        private readonly List<char> _expectedCharsFound = new EventedList<char> { 't', '_', '_', 't' };
+        private readonly IEnumerable<char> _expectedCharsFound = new List<char> { 't', '_', '_', 't' };
         private readonly Term _expectedWord = new Term("test");
         private Hangman _hangman;
 

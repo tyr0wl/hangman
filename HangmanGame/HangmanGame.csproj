@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventedList.cs" />
     <Compile Include="EventArgsObjects\EventedListItemChangedEventArgs.cs" />
     <Compile Include="Exceptions\GameNotStartedException.cs" />
     <Compile Include="Extensions\CharExtensions.cs" />

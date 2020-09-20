@@ -14,18 +14,6 @@ namespace HangmanGame.Extensions
         }
 
         /// <summary>
-        ///     Converts a string to a EventedList of chars.
-        /// </summary>
-        public static EventedList<char> ToEventedList(this string stringObject)
-        {
-            var list = stringObject.ToList();
-            var eventedList = new EventedList<char>();
-            eventedList.AddRange(list);
-
-            return eventedList;
-        }
-
-        /// <summary>
         ///     Replaces a char at the specified index in a string object with the given new char
         ///     and returns the modified string.
         /// </summary>

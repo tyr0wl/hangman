@@ -1,5 +1,7 @@
 ﻿using System;
-using HangmanGame.EventArgsObjects;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
 using HangmanGame.Extensions;
 
 namespace HangmanGame
@@ -37,7 +39,7 @@ namespace HangmanGame
         /// <summary>
         ///     The specific chars of the Term as eventedList.
         /// </summary>
-        public EventedList<char> Chars { get; private set; }
+        public ObservableCollection<char> Chars { get; private set; }
 
         /// <summary>
         ///     implicit conversation Term object to String
@@ -66,19 +68,17 @@ namespace HangmanGame
         private void SetTerm(string word)
         {
             _string = word;
-            Chars = _string.ToEventedList();
-            Chars.ItemChanged += OnCharsIndexChanged;
+            Chars = new ObservableCollection<char>(word.ToCharArray());
+            Chars.CollectionChanged += OnCharsIndexChanged;
         }
 
         /// <summary>
         ///     Changes the string property when the List of chars is changed.
         /// </summary>
-        private void OnCharsIndexChanged(object sender, EventedListItemChangedEventArgs<char> itemChangedEventArgs)
+        private void OnCharsIndexChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            var index = itemChangedEventArgs.Index;
-            var newValue = itemChangedEventArgs.NewValue;
-
-            String = String.Replace(index, newValue);
+            var newValue = notifyCollectionChangedEventArgs.NewItems.OfType<char>().FirstOrDefault();
+            String = String.Replace(notifyCollectionChangedEventArgs.OldStartingIndex, newValue);
         }
 
         /// <summary>
